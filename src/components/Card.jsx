@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Card = ({ data }) => {
+export const Card = ({ data, edit }) => {
     if (data) {
         return (
             <div className='card'>
@@ -11,10 +11,14 @@ export const Card = ({ data }) => {
                     <img alt="" src={data.thumbnailUrl} />
                     <div></div>
                     <div className='flex-end'>
-                        <i class="fas fa-edit"></i>                    </div>
+                        <button className='edit-btn' onClick={() => edit(data.id)} >
+
+                            <i className="fas fa-edit"></i>
+                        </button>
+                    </div>
                 </div>
 
-            </div>
+            </div >
         )
     }
     else {

@@ -10,3 +10,12 @@
 .card-title {
     height: 55px;
 }
+
+.edit-btn {
+    background-color: #00000000;
+    border: 0;
+    color: #2c2c2c;
+    &:hover {
+        color: #696969;
+    }
+}
