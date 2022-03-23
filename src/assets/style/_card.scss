@@ -1,0 +1,12 @@
+.card {
+    background-color: $card-bg;
+    padding: 0.8rem;
+    border-radius: 3px;
+    & p {
+        font-size: 0.8rem;
+    }
+}
+
+.card-title {
+    height: 55px;
+}

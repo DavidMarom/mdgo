@@ -7,7 +7,13 @@ export const Card = ({ data }) => {
                 <div className='card-title'>
                     <p>{data.title}</p>
                 </div>
-                <img alt="" src={data.thumbnailUrl} />
+                <div className='space-between'>
+                    <img alt="" src={data.thumbnailUrl} />
+                    <div></div>
+                    <div className='flex-end'>
+                        <i class="fas fa-edit"></i>                    </div>
+                </div>
+
             </div>
         )
     }
