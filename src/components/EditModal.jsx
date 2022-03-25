@@ -34,9 +34,12 @@ export const EditModal = ({ item, clearEdit, titleTaken }) => {
     }, [title, image])
 
     const save = () => {
-        if (titleTaken(title) && title !== item.title) {
-            setTitleErr('This title is already in use. Please use a different title')
-        } else {
+        let usedCheck = titleTaken(title, image);
+
+        if ((usedCheck[0] && title !== item.title)) { setTitleErr('This title is already in use. Please use a different title') }
+        if ((usedCheck[1] && image !== item.thumbnailUrl)) { setUrlErr('This URL is already in use. Please use a different URL') }
+
+        if (!usedCheck[0] && !usedCheck[1]) {
             let newItem = item;
             newItem.title = title;
             newItem.thumbnailUrl = image;

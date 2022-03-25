@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Card } from './Card'
 import { EditModal } from './EditModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { deletePhoto } from '../store/actions/photosActions'
 import { v4 as uuidv4 } from 'uuid';
-
 
 export const PhotosContainer = () => {
     const dispatch = useDispatch()
@@ -22,15 +21,13 @@ export const PhotosContainer = () => {
 
     const handleBack = () => { if (pageNumber > 1) { setPage(pageNumber - 1) } }
     const handleNext = () => { if (pageNumber <= photos.length / ITEMS_PER_PAGE) { setPage(pageNumber + 1) } }
-    const handleNew = () => {
 
+    const handleNew = () => {
         let newItem = {
             id: uuidv4(),
             newItem: true
         }
-
         seteditedItem(newItem);
-
     }
 
     // Passed to Card
@@ -39,19 +36,22 @@ export const PhotosContainer = () => {
 
     // Passed to EditModal
     const clearEdit = () => { seteditedItem(null); }
-    const titleTaken = (title) => {
-        // Check if title is already taken
-        let found = false;
+    
+    const titleTaken = (title , url) => {
+        // Check if title and/or is already taken
+        let foundTitle, foundURL = false;
         let i = 0;
 
         while (i < photos.length) {
             if (photos[i].title === title) {
-                found = true;
-                break;
+                foundTitle = true;
+            }
+            if (photos[i].thumbnailUrl === url) {
+                foundURL = true;
             }
             i++;
         }
-        return found;
+        return [foundTitle,foundURL];
     }
 
     if (photos.length > 0) {
@@ -69,14 +69,10 @@ export const PhotosContainer = () => {
                     {getPhotosPerPage().map((element, idx) => <Card key={idx} data={element} edit={editItem} deleteItem={deleteItem} />)}
                 </div>
 
-                <div className="space-around">
-
-                    <div onClick={handleNew} className='new-photo noselect'><p>+</p></div>
-
-                </div>
+                <div className="space-around"><div onClick={handleNew} className='new-photo noselect'><p>+</p></div></div>
             </>
         )
     } else {
-        return <h1>Loading</h1>
+        return <h1>Loading...</h1>
     }
 }
