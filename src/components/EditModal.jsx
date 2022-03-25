@@ -10,6 +10,8 @@ export const EditModal = ({ item, clearEdit, titleTaken }) => {
     const [titleErr, setTitleErr] = useState(null)
     const [urlErr, setUrlErr] = useState(null)
 
+    const [firstTime, setFirstTime] = useState(true)
+
     const [validForm, setValidForm] = useState(true)
 
     // Handlers
@@ -20,26 +22,26 @@ export const EditModal = ({ item, clearEdit, titleTaken }) => {
     useEffect(() => {
         let errors = 0;
         // Validate title
-        if (title === '') { errors++; setTitleErr('Title cannot be empty') } else { setTitleErr('') }
+        if (title === '' && !firstTime) { errors++; setTitleErr('Title cannot be empty') } else { setTitleErr('') }
 
         // Validate URL
         var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
-        if (!(expression.test(image))) {
+        if (!(expression.test(image)) && !firstTime) {
             errors++;
-            setUrlErr('Bad URL');
+            setUrlErr('Invalid URL');
         } else { setUrlErr('') }
-
+        setFirstTime(false);
         errors === 0 ? setValidForm(true) : setValidForm(false)
 
     }, [title, image])
 
     const save = () => {
         let usedCheck = titleTaken(title, image);
+        let okToSave = true;
+        if ((usedCheck[0] && title !== item.title)) { okToSave = false; setTitleErr('This title is already in use. Please use a different title') }
+        if ((usedCheck[1] && image !== item.thumbnailUrl)) { okToSave = false; setUrlErr('This URL is already in use. Please use a different URL') }
 
-        if ((usedCheck[0] && title !== item.title)) { setTitleErr('This title is already in use. Please use a different title') }
-        if ((usedCheck[1] && image !== item.thumbnailUrl)) { setUrlErr('This URL is already in use. Please use a different URL') }
-
-        if (!usedCheck[0] && !usedCheck[1]) {
+        if (okToSave) {
             let newItem = item;
             newItem.title = title;
             newItem.thumbnailUrl = image;

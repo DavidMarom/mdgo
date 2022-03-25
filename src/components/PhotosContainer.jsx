@@ -25,6 +25,8 @@ export const PhotosContainer = () => {
     const handleNew = () => {
         let newItem = {
             id: uuidv4(),
+            thumbnailUrl: '',
+            title: '',
             newItem: true
         }
         seteditedItem(newItem);
@@ -36,10 +38,11 @@ export const PhotosContainer = () => {
 
     // Passed to EditModal
     const clearEdit = () => { seteditedItem(null); }
-    
-    const titleTaken = (title , url) => {
+
+    const titleTaken = (title, url) => {
         // Check if title and/or is already taken
-        let foundTitle, foundURL = false;
+        let foundTitle = false;
+        let foundURL = false;
         let i = 0;
 
         while (i < photos.length) {
@@ -51,7 +54,7 @@ export const PhotosContainer = () => {
             }
             i++;
         }
-        return [foundTitle,foundURL];
+        return [foundTitle, foundURL];
     }
 
     if (photos.length > 0) {
