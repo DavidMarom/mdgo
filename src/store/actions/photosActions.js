@@ -18,3 +18,9 @@ export function updatePhoto(photo) {
 		dispatch({ type: 'UPDATE_PHOTO', photo });
 	};
 }
+
+export function newPhoto(photo) {
+	return async (dispatch) => {
+		dispatch({ type: 'NEW_PHOTO', photo });
+	};
+}

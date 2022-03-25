@@ -3,6 +3,7 @@ import { Card } from './Card'
 import { EditModal } from './EditModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { deletePhoto } from '../store/actions/photosActions'
+import { v4 as uuidv4 } from 'uuid';
 
 
 export const PhotosContainer = () => {
@@ -21,12 +22,23 @@ export const PhotosContainer = () => {
 
     const handleBack = () => { if (pageNumber > 1) { setPage(pageNumber - 1) } }
     const handleNext = () => { if (pageNumber <= photos.length / ITEMS_PER_PAGE) { setPage(pageNumber + 1) } }
+    const handleNew = () => {
 
-    // These functions are passed as props to the Card component
+        let newItem = {
+            id: uuidv4(),
+            newItem: true
+        }
+
+        seteditedItem(newItem);
+
+    }
+
+    // Passed to Card
     const editItem = (item) => { seteditedItem(item); }
     const deleteItem = (itemId) => { dispatch(deletePhoto(itemId)); }
-    const clearEdit = () => { seteditedItem(null); }
 
+    // Passed to EditModal
+    const clearEdit = () => { seteditedItem(null); }
     const titleTaken = (title) => {
         // Check if title is already taken
         let found = false;
@@ -48,13 +60,19 @@ export const PhotosContainer = () => {
                 {editedItem ? <EditModal item={editedItem} clearEdit={clearEdit} titleTaken={titleTaken} /> : null}
 
                 <div className='pagination'>
-                    <button className={pageNumber > 1 ? 'btn-01' : 'btn-disabled'} onClick={handleBack}>Back</button>
+                    <button className={pageNumber > 1 ? 'btn-01' : 'nav-btn-disabled'} onClick={handleBack}>Back</button>
                     <h2>{pageNumber}</h2>
-                    <button className={pageNumber < (photos.length / ITEMS_PER_PAGE) ? 'btn-01' : 'btn-disabled'} onClick={handleNext}>Next</button>
+                    <button className={pageNumber < (photos.length / ITEMS_PER_PAGE) ? 'btn-01' : 'nav-btn-disabled'} onClick={handleNext}>Next</button>
                 </div>
 
                 <div className='photos-grid'>
                     {getPhotosPerPage().map((element, idx) => <Card key={idx} data={element} edit={editItem} deleteItem={deleteItem} />)}
+                </div>
+
+                <div className="space-around">
+
+                    <div onClick={handleNew} className='new-photo noselect'><p>+</p></div>
+
                 </div>
             </>
         )

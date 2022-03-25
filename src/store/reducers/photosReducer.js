@@ -13,8 +13,9 @@ export function photos(state = initialState, action = {}) {
 
         case 'UPDATE_PHOTO':
             return { ...state, photos: state.photos.map(photo => (action.photo.id === photo.id ? action.photo : photo)) }
-            // users: state.users.map(user => (action._user._id === user._id) ? action._user : user)
 
+        case 'NEW_PHOTO':
+            return { ...state, photos: [action.photo, ...state.photos] }
 
         default:
             return state
