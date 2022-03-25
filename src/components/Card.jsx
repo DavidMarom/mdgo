@@ -11,10 +11,9 @@ export const Card = ({ data, edit }) => {
                     <img alt="" src={data.thumbnailUrl} />
                     <div></div>
                     <div className='flex-end'>
-                        <button className='edit-btn' onClick={() => edit(data.id)} >
+                        <button className='edit-btn' onClick={() => edit(data.id)} ><i className="fas fa-edit"></i></button>
+                        <button className='delete-btn'><i className="far fa-trash-alt"></i></button>
 
-                            <i className="fas fa-edit"></i>
-                        </button>
                     </div>
                 </div>
 
