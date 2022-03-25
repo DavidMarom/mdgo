@@ -23,12 +23,19 @@ export const PhotosContainer = () => {
     const handleNext = () => { if (pageNumber <= photos.length / ITEMS_PER_PAGE) { setPage(pageNumber + 1) } }
 
     // These functions are passed as props to the Card component
-    const editItem = (item) => { seteditedItem(item); }
+    const editItem = (item) => { 
+        seteditedItem(item); 
+    
+    }
 
     const deleteItem = (itemId) => {
         dispatch(deletePhoto(itemId));
     }
 
+    const clearEdit = () =>{
+        seteditedItem(null); 
+
+    }
 
     useEffect(() => {
         console.log('photos in useEffect', photos.length)
@@ -38,7 +45,7 @@ export const PhotosContainer = () => {
     if (photos.length > 0) {
         return (
             <>
-                {editedItem ? <EditModal /> : null}
+                {editedItem ? <EditModal item={editedItem} clearEdit={clearEdit} /> : null}
 
                 <div className='pagination'>
                     <button className={pageNumber > 1 ? 'btn-01' : 'btn-disabled'} onClick={handleBack}>Back</button>

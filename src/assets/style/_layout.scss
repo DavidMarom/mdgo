@@ -23,25 +23,16 @@
   }
 }
 
-.btn-01 {
-  background-color: #6687ce;
-  border: 0;
-  height: 2rem;
-  &:hover {
-    color: rgb(183, 210, 241);
-  }
-}
-
-.btn-disabled {
-  background-color: #646464;
-  border: 0;
-  height: 2rem;
-}
-
 .space-between {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.space-around {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .flex-end {

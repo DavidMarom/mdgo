@@ -9,6 +9,9 @@
 
 .card-title {
     height: 55px;
+    & p {
+        margin-top: 0.1rem;
+    }
 }
 
 .edit-btn {
@@ -27,5 +30,13 @@
     color: #2c2c2c;
     &:hover {
         color: #ce0000;
+    }
+}
+
+.card-id {
+    & p {
+        font-size: 0.7rem;
+        color: $card-id;
+        margin: 0;
     }
 }

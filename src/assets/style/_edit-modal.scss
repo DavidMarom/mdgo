@@ -7,12 +7,21 @@
 .edit-modal {
     background-color: #dddddd;
     margin-top: 25vh;
-    width: 400px;
-    height: 300px;
+    width: 700px;
+    height: 500px;
     margin-left: auto;
     margin-right: auto;
 
     border-radius: 5px;
-    filter: drop-shadow(0 0 0.75rem rgb(85, 85, 85));
-    padding: 10px;
+    filter: drop-shadow(0 0 1rem rgb(85, 85, 85));
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modal-form {
+    height: 300px;
+    background-color: #d1d1d1;
 }
