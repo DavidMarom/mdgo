@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { updatePhoto } from '../store/actions/photosActions'
 
-
-export const EditModal = ({ item, clearEdit }) => {
+export const EditModal = ({ item, clearEdit, titleTaken }) => {
+    const dispatch = useDispatch()
 
     const [image, setImage] = useState(item.thumbnailUrl)
     const [title, setTitle] = useState(item.title)
@@ -12,12 +14,9 @@ export const EditModal = ({ item, clearEdit }) => {
     const [validForm, setValidForm] = useState(true)
 
     const handleTitleChange = (ev) => { setTitle(ev.target.value); }
-    const handleUrlChange = (ev) => {
-        setImage(ev.target.value);
+    const handleUrlChange = (ev) => { setImage(ev.target.value); }
 
-
-    }
-
+    // validations
     useEffect(() => {
         let errors = 0;
         // Validate title
@@ -30,12 +29,22 @@ export const EditModal = ({ item, clearEdit }) => {
             setUrlErr('Bad URL');
         } else { setUrlErr('') }
 
-
         errors === 0 ? setValidForm(true) : setValidForm(false)
 
     }, [title, image])
 
+    const save = () => {
+        if (titleTaken(title)) {
+            setTitleErr('This title is already in use. Please use a different title')
+        } else {
+            let newItem = item;
+            newItem.title = title;
+            newItem.thumbnailUrl = image;
 
+            dispatch(updatePhoto(newItem));
+            clearEdit();
+        }
+    }
 
     return (
         <div className='modal-container'>
@@ -73,7 +82,7 @@ export const EditModal = ({ item, clearEdit }) => {
 
                 <div className='space-around'>
                     <div onClick={clearEdit} className="cancel-btn noselect"><p>Cancel</p></div>
-                    <div className={(validForm ? 'save-btn noselect' : "btn-disabled noselect")}          ><p>Save</p></div>
+                    <div onClick={save} className={(validForm ? 'save-btn noselect' : "btn-disabled noselect")}><p>Save</p></div>
                 </div>
             </div>
         </div>

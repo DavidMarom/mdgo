@@ -9,7 +9,12 @@ export function fetchPhotos() {
 
 export function deletePhoto(id) {
 	return async (dispatch) => {
-		// const photos = await photoService.getPhotos();
 		dispatch({ type: 'DELETE_PHOTO', id });
+	};
+}
+
+export function updatePhoto(photo) {
+	return async (dispatch) => {
+		dispatch({ type: 'UPDATE_PHOTO', photo });
 	};
 }

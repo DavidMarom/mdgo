@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card } from './Card'
 import { EditModal } from './EditModal'
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { deletePhoto } from '../store/actions/photosActions'
 
 
@@ -23,29 +23,29 @@ export const PhotosContainer = () => {
     const handleNext = () => { if (pageNumber <= photos.length / ITEMS_PER_PAGE) { setPage(pageNumber + 1) } }
 
     // These functions are passed as props to the Card component
-    const editItem = (item) => { 
-        seteditedItem(item); 
-    
+    const editItem = (item) => { seteditedItem(item); }
+    const deleteItem = (itemId) => { dispatch(deletePhoto(itemId)); }
+    const clearEdit = () => { seteditedItem(null); }
+
+    const titleTaken = (title) => {
+        // Check if title is already taken
+        let found = false;
+        let i = 0;
+
+        while (i < photos.length) {
+            if (photos[i].title === title) {
+                found = true;
+                break;
+            }
+            i++;
+        }
+        return found;
     }
-
-    const deleteItem = (itemId) => {
-        dispatch(deletePhoto(itemId));
-    }
-
-    const clearEdit = () =>{
-        seteditedItem(null); 
-
-    }
-
-    useEffect(() => {
-        console.log('photos in useEffect', photos.length)
-    }, [photos])
-
 
     if (photos.length > 0) {
         return (
             <>
-                {editedItem ? <EditModal item={editedItem} clearEdit={clearEdit} /> : null}
+                {editedItem ? <EditModal item={editedItem} clearEdit={clearEdit} titleTaken={titleTaken} /> : null}
 
                 <div className='pagination'>
                     <button className={pageNumber > 1 ? 'btn-01' : 'btn-disabled'} onClick={handleBack}>Back</button>
@@ -54,7 +54,7 @@ export const PhotosContainer = () => {
                 </div>
 
                 <div className='photos-grid'>
-                    {getPhotosPerPage().map((element, idx) => <Card key={idx} data={element} edit={editItem} deleteItem={deleteItem}/>)}
+                    {getPhotosPerPage().map((element, idx) => <Card key={idx} data={element} edit={editItem} deleteItem={deleteItem} />)}
                 </div>
             </>
         )
