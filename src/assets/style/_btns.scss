@@ -1,8 +1,8 @@
-.btn-disabled {
-    background-color: #646464;
-    border: 0;
-    height: 2rem;
-}
+// .btn-disabled {
+//     background-color: #646464;
+//     border: 0;
+//     height: 2rem;
+// }
 
 .btn-01 {
     background-color: #6687ce;
@@ -32,7 +32,7 @@
     padding: 0px 25px 0px 25px;
 
     & p {
-        line-height: 0;
+        line-height: 2rem;
     }
     &:hover {
         background-color: #0c972f;
@@ -41,19 +41,30 @@
 }
 
 .cancel-btn {
+    background-color: #0066f2;
+    color: #dbdbdb;
+    border: 0;
+    border-radius: 50px;
+    padding: 0px 25px 0px 25px;
+
+    & p {
+        line-height: 2rem;
+    }
+    &:hover {
+        background-color: #1270f3;
+        color: #ffffff;
+    }
+}
+
+.btn-disabled {
     background-color: #818181;
     color: #dbdbdb;
     border: 0;
     border-radius: 50px;
-
     padding: 0px 25px 0px 25px;
 
     & p {
-        line-height: 0;
-    }
-    &:hover {
-        background-color: #727272;
-        color: #ffffff;
+        line-height: 2rem;
     }
 }
 

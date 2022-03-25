@@ -19,8 +19,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
- 
-    & p{
+
+    & p {
         display: inline;
     }
 }
@@ -34,4 +34,21 @@
 
     height: 300px;
     background-color: #d1d1d1;
+}
+
+.error-text {
+    font-size: 0.6rem;
+    color: #d60000;
+    height: 0.7rem;
+    width: 100%;
+}
+
+.form-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 25px;
+    & p {
+        line-height: 0;
+    }
 }
