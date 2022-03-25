@@ -1,5 +1,5 @@
-# MDGO
-An assignement for MDGO
+# Sensa
+An assignement for MDGO / Sensa
 
 ## Deploy
 - Clone
