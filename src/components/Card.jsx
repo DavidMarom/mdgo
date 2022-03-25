@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Card = ({ data, edit }) => {
+export const Card = ({ data, edit, deleteItem }) => {
     if (data) {
         return (
             <div className='card'>
@@ -12,7 +12,7 @@ export const Card = ({ data, edit }) => {
                     <div></div>
                     <div className='flex-end'>
                         <button className='edit-btn' onClick={() => edit(data.id)} ><i className="fas fa-edit"></i></button>
-                        <button className='delete-btn'><i className="far fa-trash-alt"></i></button>
+                        <button className='delete-btn' onClick={() => deleteItem(data.id) } ><i className="far fa-trash-alt"></i></button>
 
                     </div>
                 </div>

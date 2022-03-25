@@ -8,6 +8,9 @@ export function photos(state = initialState, action = {}) {
         case 'FETCH_PHOTOS':
             return { ...state, photos: action.photos }
 
+        case 'DELETE_PHOTO':
+            return { ...state, photos: state.photos.filter(photo => photo.id !== action.id) }
+
         default:
             return state
     }
